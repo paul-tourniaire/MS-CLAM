@@ -1,3 +1,6 @@
+# ignore the whole data directory
+data
+
 *.pdf
 *.zip
 .DS_Store

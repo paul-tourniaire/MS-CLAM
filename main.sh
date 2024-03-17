@@ -24,5 +24,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 --labeled_weights_init_val 90 \
 --double-loader \
 --tile-labels-at-random 10 \
---to-exclude ./incomplete_annotations.csv \
+--to-exclude ./dataset_csv/camelyon16_incomplete_annotations.csv \
 --gt-dir ./data/camelyon16/gt_patches_indexes

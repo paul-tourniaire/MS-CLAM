@@ -76,7 +76,7 @@ python get_tile-level_masks.py --tile_path ./results/camelyon16/msclam_exp_0_s1/
 Then, the Dice score and the specificity are obtained thanks to:
 
 ```shell
-python calculate_dice_score.py --predicted_masks_path ./results/camelyon16/msclam_exp_0_s1/predicted_masks/fold_0/th-0.5/ --tile_predictions_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dataset ./dataset_csv/camelyon16.csv --reference_masks ./data/camelyon16/reference_masks --tile_mask_gt
+python calculate_dice_score.py --predicted_masks_path ./results/camelyon16/msclam_exp_0_s1/predicted_masks/fold_0/th-0.5/ --tile_predictions_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dataset ./dataset_csv/camelyon16.csv --reference_masks ./data/camelyon16/reference_masks # --tile_mask_gt
 ```
 
-The `--tile_mask_gt` flag indicates that the reference mask should be the tile-accurate mask, instead of the pixel-accurate one. In the tile-accurate-mask, entire tiles are labeled True or False whether they contain tumor or not.
+The `--tile_mask_gt` flag can be added to indicate that the reference mask should be the tile-accurate mask, instead of the pixel-accurate one. In the tile_accurate_mask, entire tiles are labeled True or False whether they contain tumor or not.

@@ -19,7 +19,7 @@ In this repository, one should find all the necessary elements to:
   2. `features`, where an array of size Nxd should be stored, and each row is the latent space representation of a tile in the slide. N is the number of tiles in the slide, and d is the dimension of the embeddings. For instance, if an Imagenet pretrained Resnet-50 is used to extract features, d=1024 (using the implementation of the authors of CLAM). This array is also contained in the .pt files (for faster and easier training).
 - The pickle files that contain the labeled tiles indexes should have the '.pkl' extension. These files contain lists of indexes that match the ones in the .pt or .h5 files. Each index in the list corresponds to a tumorous tile.
 - Examples of such files are located in the `data` folder.
-- If using the `--tile-labels-predefined` flag, then the `splits` directory should contain a subdirectory for the dataset, and another one for the dataset with only the annotated slides in the training set. The structure of the `splits` directory then reads (ratio defines the percentage of annotated slides):
+- If using the `--tile_labels_predefined` flag, then the `splits` directory should contain a subdirectory for the dataset, and another one for the dataset with only the annotated slides in the training set. The structure of the `splits` directory then reads (ratio defines the percentage of annotated slides):
 
 ```bash
 splits/
@@ -47,7 +47,7 @@ conda activate msclam
 ```
 
 ## Training
-To train the model, simply launch `./main.sh` after you have activated the conda virtual environment. If you wish to use predefined tile labels instead of randomly chosen ones, simply change the `--tile-labels-at-random` flag to `--tile-labels-predefined`.
+To train the model, simply launch `./main.sh` after you have activated the conda virtual environment. If you wish to use predefined tile labels instead of randomly chosen ones, simply change the `--tile_labels_at_random` flag to `--tile_labels_predefined`.
 
 ## Inference
 

@@ -62,7 +62,7 @@ The following commands are given assuming that the experiment name in the `main.
 The following command will generate attention_maps for the available slides
 
 ```shell
-python attention_maps.py --att_scores_path ./results/attention_scores/fold_0 --dst_dir ./results/camelyon16/msclam_exp_0_s1/attention_maps/fold_0 --slide-dir ./data/camelyon16/slides/ --h5-files ./data/camelyon16/features/h5_files
+python attention_maps.py --att_scores_path ./results/camelyon16/msclam_exp_0_s1/attention_scores/fold_0 --dst_dir ./results/camelyon16/msclam_exp_0_s1/attention_maps/fold_0 --slide-dir ./data/camelyon16/slides/ --h5-files ./data/camelyon16/features/h5_files
 ```
 
 ### Tile-level metrics and maps

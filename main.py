@@ -121,6 +121,7 @@ if __name__ == "__main__":
         'use_att_loss': args.use_att_loss,
         'att_weight': args.att_weight,
         'tile_labels_predefined': args.tile_labels_predefined,
+        'to_exclude': args.to_exclude,
         'exp_weighted_sample': args.exp_weighted_sample,
         'sampler_weight_decay': args.sampler_weight_decay,
         'labeled_weights_init_val': args.labeled_weights_init_val,

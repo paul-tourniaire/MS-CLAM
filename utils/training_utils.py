@@ -211,8 +211,7 @@ def get_training_results(datasets, cur, args, test_metrics):
 
     # load list of slides with incomplete annotations.
     # these slides are not sampled to be used as labeled.
-    incomplete_annot = \
-        pd.read_csv("./incomplete_annotations.csv")["slide_id"]
+    incomplete_annot = pd.read_csv(args.to_exclude)["slide_id"]
 
     if args.tile_labels_predefined:
         partial_split_file = os.path.join(

@@ -11,14 +11,87 @@ In this repository, one should find all the necessary elements to:
 - generate attention maps, which map the attention scores of the tiles to a color map showing in red the highest ones, and in blue the lowest.
 - generate tumor masks, which are binary masks where each tile that is predicted as tumorous appears in white
 
-## Notes
 
-- The slides are expected to be saved as .h5 or .pt files (see the [CLAM](https://github.com/mahmoodlab/CLAM) repo to see how it can be done).
-- The h5 files should contain two keys:
+## Virtual environment
+The file msclam.yml contains the necessary packages for this repository. Simply create a conda virtual environment with:
+
+```shell
+conda env create -f msclam.yml
+```
+Then, activate it with:
+
+```shell
+conda activate msclam
+```
+
+## Create Patches and Extract Features
+
+Patch creation and feature extraction are performed using the [CLAM repository](https://github.com/mahmoodlab/CLAM)
+
+Clone the CLAM repository at the same level as the MS-CLAM repository:
+
+```shell
+cd ..
+git clone https://github.com/mahmoodlab/CLAM
+cd CLAM
+```
+
+Commit of the CLAM repository used in this project: [`38449ae`](https://github.com/mahmoodlab/CLAM/commit/38449aeb25a56486cbbb49d2fbf7cf819ab621e2)
+
+### Create patches
+
+Unfortunately, the preset file used for segmenting tissue and generating patch coordinates for this work was lost. However, to facilitate reproducibility, the patch coordinates generated with [create_patches_fp.py](https://github.com/mahmoodlab/CLAM/blob/master/create_patches_fp.py) and used in the original work are provided in the `data/camelyon16/patches_fp` directory.
+
+
+If you wish experiment with different tissue segmentation parameters and then to create patches yourself , you first need to create your own preset file by using [build_preset.py](https://github.com/mahmoodlab/CLAM/blob/master/build_preset.py).
+```shell
+# check other arguments that you can change in the build_preset.py file
+python build_preset.py --preset_name camelyon16-default.csv
+```
+
+Then, you can create patches and extract features with the following command:
+```shell
+# tmux new-session -s create-camelyon16-clam-coords
+# tmux attach -t create-camelyon16-clam-coords
+# conda activate msclam
+
+python create_patches_fp.py \
+  --source ../MS-CLAM/data/camelyon16/slides \
+  --save_dir ../MS-CLAM/data/camelyon16/clam_generated_patches_fp \
+  --patch_size 256 \
+  --preset camelyon16-default.csv \
+  --seg --patch --stitch
+```
+
+Note, we are saving the patches in the `clam_generated_patches_fp` directory not to overwrite the patches used in the original work and provided in the `data/camelyon16/patches_fp` directory.
+
+## Extract features
+
+To extract features, use [extract_features_fp.py](https://github.com/mahmoodlab/CLAM/blob/master/extract_features_fp.py) as shown below. You can speed up the process if you have a GPU with more memory or even multiple GPUs by
+- increasing the `batch_size` parameter, e.g. to 512
+- setting `CUDA_VISIBLE_DEVICES=0,1,2,3` if you have 4 GPUs
+
+```shell
+# tmux new-session -s extract-camelyon16-features
+# tmux attach -t extract-camelyon16-features
+# conda activate msclam
+
+# patches_fp has the coordinates shared by the authors of MS-CLAM
+CUDA_VISIBLE_DEVICES=0 python extract_features_fp.py \
+  --data_h5_dir ../MS-CLAM/data/camelyon16/patches_fp/ \
+  --data_slide_dir ../MS-CLAM/data/camelyon16/slides \
+  --csv_path ../MS-CLAM/data/camelyon16/patches_fp/process_list.csv \
+  --feat_dir ../MS-CLAM/data/camelyon16/features/ \
+  --batch_size 256 \
+  --slide_ext .tif
+```
+
+- The h5 files will contain two keys:
   1. `coords`, where an array of size Nx2 should be stored, with the coordinates for all the tiles (openslide format, level 0)
   2. `features`, where an array of size Nxd should be stored, and each row is the latent space representation of a tile in the slide. N is the number of tiles in the slide, and d is the dimension of the embeddings. For instance, if an Imagenet pretrained Resnet-50 is used to extract features, d=1024 (using the implementation of the authors of CLAM). This array is also contained in the .pt files (for faster and easier training).
-- The pickle files that contain the labeled tiles indexes should have the '.pkl' extension. These files contain lists of indexes that match the ones in the .pt or .h5 files. Each index in the list corresponds to a tumorous tile.
-- Examples of such files are located in the `data` folder.
+
+## Splits
+
 - If using the `--tile_labels_predefined` flag, then the `splits` directory should contain a subdirectory for the dataset, and another one for the dataset with only the annotated slides in the training set. The structure of the `splits` directory then reads (ratio defines the percentage of annotated slides):
 
 ```bash
@@ -33,18 +106,10 @@ splits/
         └── ...
   └── ...
 ```
+## Tile-level labels
 
-## Virtual environment
-The file msclam.yml contains the necessary packages for this repository. Simply create a conda virtual environment with:
-
-```shell
-conda env create -f msclam.yml
-```
-Then, activate it with:
-
-```shell
-conda activate msclam
-```
+To promote reproducibility, we provide the tile-level labels used in the original work in the `data/camelyon16/gt_patches_indexes` directory.
+The pickle files that contain the labeled tiles indexes should have the '.pkl' extension. These files contain lists of indexes that match the ones in the .pt or .h5 files. Each index in the list corresponds to a tumorous tile.
 
 ## Training
 To train the model, simply launch `./main.sh` after you have activated the conda virtual environment. If you wish to use predefined tile labels instead of randomly chosen ones, simply change the `--tile_labels_at_random` flag to `--tile_labels_predefined`.

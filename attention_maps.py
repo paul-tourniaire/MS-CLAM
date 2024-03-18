@@ -94,11 +94,11 @@ if __name__ == "__main__":
         "--dst_dir", required=True, help="Path to the destination folder."
     )
     parser.add_argument(
-        "--slide-dir", required=True,
+        "--slide_dir", required=True,
         help='Path to the directory containing the slides.'
     )
     parser.add_argument(
-        "--h5-files", required=True,
+        "--h5_files", required=True,
         help="Path to the directory containing the h5 files "
         "corresponding to the slides. These files should contain "
         "the coordinates of the tiles"

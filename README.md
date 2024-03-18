@@ -62,7 +62,7 @@ The following commands are given assuming that the experiment name in the `main.
 The following command will generate attention_maps for the available slides
 
 ```shell
-python attention_maps.py --att_scores_path ./results/camelyon16/msclam_exp_0_s1/attention_scores/fold_0 --dst_dir ./results/camelyon16/msclam_exp_0_s1/attention_maps/fold_0 --slide-dir ./data/camelyon16/slides/ --h5-files ./data/camelyon16/features/h5_files
+python attention_maps.py --att_scores_path ./results/camelyon16/msclam_exp_0_s1/attention_scores/fold_0 --dst_dir ./results/camelyon16/msclam_exp_0_s1/attention_maps/fold_0 --slide_dir ./data/camelyon16/slides/ --h5_files ./data/camelyon16/features/h5_files
 ```
 
 ### Tile-level metrics and maps
@@ -70,13 +70,13 @@ python attention_maps.py --att_scores_path ./results/camelyon16/msclam_exp_0_s1/
 First, the tile-level maps should be created before the metrics are computed:
 
 ```shell
-python get_tile-level_masks.py --tile_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dst_dir ./results/camelyon16/predicted_masks/fold_0 --slide-dir ./data/camelyon16/slides --thresh 0.5 --patch_size 256
+python get_tile-level_masks.py --tile_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dst_dir ./results/camelyon16/msclam_exp_0_s1/predicted_masks/fold_0 --slide_dir ./data/camelyon16/slides --thresh 0.5 --patch_size 256 --h5_files ./data/camelyon16/features/h5_files
 ```
 
 Then, the Dice score and the specificity are obtained thanks to:
 
 ```shell
-python calculate_dice_score.py --predicted-masks-path ./results/camelyon16/msclam_exp_0_s1/predicted_masks/fold_0/th-0.5/ --tile_predictions_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dataset ./dataset_csv/camelyon16.csv --reference_masks ./data/camelyon16/reference_masks --tile-mask-gt
+python calculate_dice_score.py --predicted_masks_path ./results/camelyon16/msclam_exp_0_s1/predicted_masks/fold_0/th-0.5/ --tile_predictions_path ./results/camelyon16/msclam_exp_0_s1/tile_predictions/fold_0 --dataset ./dataset_csv/camelyon16.csv --reference_masks ./data/camelyon16/reference_masks --tile_mask_gt
 ```
 
-The `--tile-mask-gt` flag indicates that the reference mask should be the tile-accurate mask, instead of the pixel-accurate one. In the tile-accurate-mask, entire tiles are labeled True or False whether they contain tumor or not.
+The `--tile_mask_gt` flag indicates that the reference mask should be the tile-accurate mask, instead of the pixel-accurate one. In the tile-accurate-mask, entire tiles are labeled True or False whether they contain tumor or not.

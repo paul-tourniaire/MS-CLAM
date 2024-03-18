@@ -50,22 +50,13 @@ def get_predictions(pred_file, pred_folder, pred_type="soft"):
 
 def main(args):
     if args.task == "camelyon16":
-        gt_folder = (
-            "/data/epione/user/ptournia/CAMELYON16/"
-            "gt_patches_indexes_new_filtered"
-        )
-        h5_folder = (
-            "/data/epione/user/ptournia/CAMELYON16/data/CLAM_features/h5_files"
-        )
+        gt_folder = "./data/camelyon16/gt_patches_indexes"
+        h5_folder = "./data/camelyon16/features/h5_files"
+
     elif args.task == "digestpath2019":
-        gt_folder = (
-            "/data/epione/user/ptournia/DigestPath2019/"
-            "gt_patches_indexes_128x128"
-        )
-        h5_folder = (
-            "/data/epione/user/ptournia/DigestPath2019/data/"
-            "CLAM_features_128x128/h5_files"
-        )
+        # extracted patches were 128x128 pixels in the original work
+        gt_folder = "./data/digestpath2019/gt_patches_indexes"
+        h5_folder = "./data/digestpath2019/features/h5_files"
 
     exp_name = os.path.basename(args.experiment.rstrip('/'))
 

@@ -400,7 +400,7 @@ def get_training_results(datasets, cur, args, test_metrics):
         args.results_dir, 'attention_scores', f'fold_{cur}'
     )
     inst_save_path = os.path.join(
-        args.results_dir, 'tile-predictions', f'fold_{cur}'
+        args.results_dir, 'tile_predictions', f'fold_{cur}'
     )
     os.makedirs(att_save_path, exist_ok=True)
     os.makedirs(inst_save_path, exist_ok=True)

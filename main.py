@@ -8,7 +8,7 @@ import pandas as pd
 import torch
 
 from datasets.dataset_generic import Generic_MIL_Dataset
-from parser import Parser
+from msclam_parser import Parser
 from utils.file_utils import save_pkl
 from utils.utils import f1_score
 from utils.training_utils import get_training_results

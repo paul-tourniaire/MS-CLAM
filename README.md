@@ -11,6 +11,27 @@ In this repository, one should find all the necessary elements to:
 - generate attention maps, which map the attention scores of the tiles to a color map showing in red the highest ones, and in blue the lowest.
 - generate tumor masks, which are binary masks where each tile that is predicted as tumorous appears in white
 
+## Data provided to improve reproducibility
+
+You can download the data folder from google drive link: [data](...) **TODO: Add link**
+
+```shell
+data
+  ├── camelyon16
+        ├── patches_fp
+              ├── patches
+                    ├── normal_001.h5
+                    ├── normal_002.h5
+                    └── ...
+              ├── process_list.csv
+        ├── gt_patches_indexes
+              ├── test_001.pkl
+              ├── test_002.pkl
+              └── test_004.pkl
+              └── ...
+```
+
+You will need to download the camelyon16 slides yourself from the [Camelyon17 challenge website](https://camelyon17.grand-challenge.org/Data/). The slides should be placed in the `data/camelyon16/slides` directory.
 
 ## Virtual environment
 The file msclam.yml contains the necessary packages for this repository. Simply create a conda virtual environment with:
@@ -94,7 +115,7 @@ CUDA_VISIBLE_DEVICES=0 python extract_features_fp.py \
 
 - If using the `--tile_labels_predefined` flag, then the `splits` directory should contain a subdirectory for the dataset, and another one for the dataset with only the annotated slides in the training set. The structure of the `splits` directory then reads (ratio defines the percentage of annotated slides):
 
-```bash
+```shell
 splits/
   ├── dataset_name
         ├── splits_0.csv

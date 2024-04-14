@@ -126,11 +126,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
-        "--predicted-masks-path",
+        "--predicted_masks_path",
         required=True, help="Path to the predicted masks."
     )
     parser.add_argument(
-        "--tile-predictions-path",
+        "--tile_predictions_path",
         required=True, help="Path to the tile predictions."
     )
     parser.add_argument(
@@ -138,7 +138,7 @@ if __name__ == "__main__":
         required=True, help='Path to the csv file corresponding to the dataset'
     )
     parser.add_argument(
-        '--reference-masks',
+        '--reference_masks',
         required=True,
         help="Path to the directory containing the reference masks as images."
     )

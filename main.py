@@ -8,7 +8,7 @@ import pandas as pd
 import torch
 
 from datasets.dataset_generic import Generic_MIL_Dataset
-from parser import Parser
+from msclam_parser import Parser
 from utils.file_utils import save_pkl
 from utils.utils import f1_score
 from utils.training_utils import get_training_results
@@ -121,6 +121,7 @@ if __name__ == "__main__":
         'use_att_loss': args.use_att_loss,
         'att_weight': args.att_weight,
         'tile_labels_predefined': args.tile_labels_predefined,
+        'to_exclude': args.to_exclude,
         'exp_weighted_sample': args.exp_weighted_sample,
         'sampler_weight_decay': args.sampler_weight_decay,
         'labeled_weights_init_val': args.labeled_weights_init_val,

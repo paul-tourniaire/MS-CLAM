@@ -1,6 +1,11 @@
+data
+results
+
+__pycache__
+.DS_Store
+
 *.pdf
 *.zip
-.DS_Store
 *.svg
 *.txt
 *.pkl

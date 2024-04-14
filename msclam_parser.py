@@ -102,11 +102,11 @@ class Parser(argparse.ArgumentParser):
             help='number of positive/negative patches to sample for clam'
         )
         self.add_argument(
-            '--ms-clam', action="store_true", default=False,
+            '--ms_clam', action="store_true", default=False,
             help="MS-CLAM setting: no negative pseudo-labels for normal slides"
         )
         self.add_argument(
-            '--use-tile-labels', action='store_true', default=False,
+            '--use_tile_labels', action='store_true', default=False,
             help='Use tile ground truth labels when available'
         )
         self.add_argument(
@@ -114,7 +114,7 @@ class Parser(argparse.ArgumentParser):
             help="number of patches to sample from ground truth regions"
         )
         self.add_argument(
-            "--gt-dir",
+            "--gt_dir",
             help="Path to the files containing the labels of the tiles. The "
             "file should be a pickle file containing a list of indexes which "
             "correspond to the indexes of the tiles in the .pt or .h5 file."
@@ -131,20 +131,20 @@ class Parser(argparse.ArgumentParser):
             help="attention loss coefficient"
         )
         self.add_argument(
-            "--tile-labels-predefined", type=str,
+            "--tile_labels_predefined", type=str,
             help="Use tile labels from a predefined selection. "
             "Under the `split_dir` directory, a folder corresponding "
             "to the dataset with the desired amount of labeled slides "
             "should be available."
         )
         self.add_argument(
-            "--tile-labels-at-random", type=int,
+            "--tile_labels_at_random", type=int,
             help="Select randomly among the slides the ones that are "
             "tile-labeled, as opposed to what tile-labels-predefined does. "
             "The quantity represents the percentage of labeled slides."
         )
         self.add_argument(
-            "--to-exclude",
+            "--to_exclude",
             help="The path to a csv file indicating slide ids which should "
             "not be considered when sampling tile-labeled slides."
         )
@@ -166,17 +166,17 @@ class Parser(argparse.ArgumentParser):
             "(when using ExponentialWeightedSampler)."
         )
         self.add_argument(
-            "--accumulate-gradient", type=int, default=1,
+            "--accumulate_gradient", type=int, default=1,
             help="Defines the number of steps when accumulating gradient. "
             "Default: 1 (no accumulation)."
         )
         self.add_argument(
-            "--double-loader", action="store_true", default=False,
+            "--double_loader", action="store_true", default=False,
             help="Use two loaders for the slides instead of one. "
             "Tumorous and normal slides are loaded separately."
         )
         self.add_argument(
-            "--inst-weighted-ce", nargs='*', type=float, default=[1., 1.],
+            "--inst_weighted_ce", nargs='*', type=float, default=[1., 1.],
             help="Use weights in the instance loss function."
         )
 

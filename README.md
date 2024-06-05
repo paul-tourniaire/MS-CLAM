@@ -13,7 +13,8 @@ In this repository, one should find all the necessary elements to:
 
 ## Data provided to improve reproducibility
 
-You can download the data folder from google drive link: [data](...) **TODO: Add link**
+You can download the data folder from google drive link: [data](https://drive.google.com/drive/folders/1hmMJnHifMh1e92RT-nAKpDh18WSrm6J7?usp=drive_link)
+<!-- **TODO: Add link** -->
 
 ```shell
 data
